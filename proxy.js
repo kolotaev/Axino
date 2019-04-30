@@ -8,6 +8,6 @@ let server = http.createServer((req, res) => {
     // and then proxy the request.
     proxy.web(req, res, { target: 'http://127.0.0.1:80' });
 });
-  
+
 console.log("listening on port 5050")
 server.listen(5050);
