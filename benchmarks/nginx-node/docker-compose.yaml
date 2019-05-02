@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  # app that will be proxied 
+  hello-server:
+    container_name: hello-server
+    build:
+      dockerfile: Dockerfile.hello
+      context: .
+    ports:
+      - 8080:8080
+
+  js-http-proxy:
+    container_name: js-http-proxy
+    build:
+      dockerfile: Dockerfile.proxy
+      context: .
+    ports:
+      - 9080:9080

@@ -1,0 +1,9 @@
+FROM golang:alpine
+
+ADD . .
+
+RUN go build server.go
+
+ENTRYPOINT ./server
+
+EXPOSE 8080

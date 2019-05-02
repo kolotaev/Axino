@@ -1,0 +1,8 @@
+FROM node:alpine
+
+ADD . .
+
+RUN npm install http-proxy
+
+EXPOSE 9080
+CMD [ "node", "proxy.js" ]
