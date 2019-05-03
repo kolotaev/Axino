@@ -2,18 +2,44 @@ version: '3.1'
 
 services:
   # app that will be proxied 
-  hello-server:
+  hello:
     container_name: hello-server
     build:
       dockerfile: Dockerfile.hello
       context: .
+    restart: always
     ports:
-      - 8080:8080
+      - 8080:80
+    environment:
+      PORT: 80
 
+  # Nodejs 'http-proxy' reverse proxy
   js-http-proxy:
     container_name: js-http-proxy
     build:
       dockerfile: Dockerfile.proxy
       context: .
+    restart: always
+    links:
+      - hello:hello-server
+    depends_on:
+      - hello
     ports:
-      - 9080:9080
+      - 9080:81
+    environment:
+      PORT: 81
+      TARGET: http://hello-server:80
+
+  # Nginx reverse proxy
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 7080:80
+    links:
+      - hello:hello-server
+    depends_on:
+      - hello
