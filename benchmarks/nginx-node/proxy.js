@@ -1,6 +1,6 @@
-const httpProxy = require('http-proxy');
 const http = require('http');
 const process = require('process');
+const httpProxy = require('http-proxy');
 
 const proxy = httpProxy.createProxyServer({});
 

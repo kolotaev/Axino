@@ -43,3 +43,20 @@ services:
       - hello:hello-server
     depends_on:
       - hello
+
+  # Nodejs 'redbird' reverse proxy
+  redbird-proxy:
+    container_name: js-redbird-proxy
+    build:
+      dockerfile: Dockerfile.redbird
+      context: .
+    restart: always
+    links:
+      - hello:hello-server
+    depends_on:
+      - hello
+    ports:
+      - 6080:81
+    environment:
+      PORT: 81
+      TARGET: http://hello-server:80
