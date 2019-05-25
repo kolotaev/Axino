@@ -1,0 +1,7 @@
+Config:
+https://github.com/godaddy/node-flipr
+https://github.com/platformsh/config-reader-nodejs
+* https://github.com/lorenwest/node-config
+https://github.com/harishanchu/nodejs-config
+https://github.com/kmoskwiak/muchconf#external-providers
+
