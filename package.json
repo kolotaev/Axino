@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha test/unit/**"
+  },
   "dependencies": {},
   "devDependencies": {
     "eslint": "^5.16",
