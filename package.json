@@ -1,11 +1,18 @@
 {
   "name": "axino",
   "version": "0.1.0",
-  "main": "index.js",
   "license": "MIT",
+  "main": "lib",
+  "files": [
+    "lib",
+    "index.js"
+	],
   "scripts": {
     "test": "mocha test/unit/**"
   },
+  "engines": {
+		"node": ">=8"
+	},
   "dependencies": {},
   "devDependencies": {
     "eslint": "^5.16",
