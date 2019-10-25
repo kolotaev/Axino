@@ -2,6 +2,7 @@ const chai = require('chai').should();
 
 const { AggregateRoot } = require('../../../lib/aggregate');
 
+
 describe('AggregateRoot', () => {
   describe('#toString()', function() {
     describe('should return aggregate class name and ID string representation', () => {
@@ -10,8 +11,8 @@ describe('AggregateRoot', () => {
         `${ar}`.should.equal('AggregateRoot: 123');
       });
       it('for custom class', () => {
-        let orderARClass = class OrderAggregateRoot extends AggregateRoot {}
-        let orderAR = new orderARClass('asdf');
+        let clazz = class OrderAggregateRoot extends AggregateRoot {}
+        let orderAR = new clazz('asdf');
         `${orderAR}`.should.equal('OrderAggregateRoot: asdf');
       });
     });
