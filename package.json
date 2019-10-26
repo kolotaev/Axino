@@ -11,7 +11,7 @@
     "CHANGELOG.md"
 	],
   "scripts": {
-    "test": "mocha test/unit/**"
+    "test": "mocha"
   },
   "engines": {
 		"node": ">=8"

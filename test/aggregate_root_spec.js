@@ -1,6 +1,6 @@
 const chai = require('chai').should();
 
-const { AggregateRoot } = require('../../../lib/aggregate');
+const { AggregateRoot } = require('../lib/aggregate');
 
 
 describe('AggregateRoot', () => {
