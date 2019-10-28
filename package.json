@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "main": "lib",
-  "author": "Egor Kolotaev",
+  "author": "Egor Kolotaev <ekolotaev@gmail.com>",
   "files": [
     "lib",
     "LICENSE",
