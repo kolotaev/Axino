@@ -10,4 +10,4 @@ globals:
 parserOptions:
   ecmaVersion: 2018
 rules:
-  indent: ["error", 4]
+  indent: ["error", 2]
