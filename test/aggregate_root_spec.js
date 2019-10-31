@@ -7,12 +7,12 @@ describe('AggregateRoot', () => {
   describe('#toString()', function() {
     describe('should return aggregate class name and ID string representation', () => {
       it('for base class', () => {
-        let ar = new AggregateRoot(123);
+        const ar = new AggregateRoot(123);
         `${ar}`.should.equal('AggregateRoot: 123');
       });
       it('for custom class', () => {
-        let clazz = class OrderAggregateRoot extends AggregateRoot {}
-        let orderAR = new clazz('asdf');
+        const clazz = class OrderAggregateRoot extends AggregateRoot {}
+        const orderAR = new clazz('asdf');
         `${orderAR}`.should.equal('OrderAggregateRoot: asdf');
       });
     });
