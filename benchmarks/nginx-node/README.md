@@ -85,3 +85,47 @@ Running 1m test @ http://localhost:9080/random
 Requests/sec:    386.14
 Transfer/sec:     70.13KB
 ```
+
+
+NodeJS http-proxy reverse proxy for hello-service with Keep-alive agent:
+```
+wrk -t12 -c400 -d1m http://localhost:9080/random
+Running 1m test @ http://localhost:9080/random
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   175.21ms   25.29ms 402.30ms   87.67%
+    Req/Sec   111.08     64.21   320.00     66.36%
+  79107 requests in 1.00m, 14.41MB read
+  Socket errors: connect 156, read 384, write 0, timeout 0
+Requests/sec:   1316.44
+Transfer/sec:    245.52KB
+```
+
+
+Redbird reverse proxy for hello-service:
+```
+wrk -t12 -c400 -d1m http://localhost:6080/random
+Running 1m test @ http://localhost:6080/random
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   526.63ms  125.10ms   1.59s    77.40%
+    Req/Sec    37.12     31.80   237.00     79.34%
+  24034 requests in 1.00m, 4.26MB read
+  Socket errors: connect 157, read 3297, write 1, timeout 0
+Requests/sec:    399.88
+Transfer/sec:     72.63KB
+```
+
+Redbird reverse proxy for hello-service with Keep-alive agent:
+```
+wrk -t12 -c400 -d1m http://localhost:6080/random
+Running 1m test @ http://localhost:6080/random
+  12 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   526.63ms  125.10ms   1.59s    77.40%
+    Req/Sec    37.12     31.80   237.00     79.34%
+  24034 requests in 1.00m, 4.26MB read
+  Socket errors: connect 157, read 3297, write 1, timeout 0
+Requests/sec:    399.88
+Transfer/sec:     72.63KB
+```
