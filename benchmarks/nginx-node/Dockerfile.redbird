@@ -1,4 +1,0 @@
-FROM node:alpine
-ADD . .
-RUN npm install redbird
-CMD [ "node", "redbird.js" ]

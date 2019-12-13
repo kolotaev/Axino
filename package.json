@@ -4,9 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "express": "~4.16.4",
-    "http-proxy": "~1.17.0",
-    "redbird": "~0.9.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

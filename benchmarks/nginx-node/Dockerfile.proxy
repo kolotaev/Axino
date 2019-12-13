@@ -1,4 +1,0 @@
-FROM node:alpine
-ADD . .
-RUN npm install http-proxy
-CMD [ "node", "proxy.js" ]
