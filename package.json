@@ -23,7 +23,9 @@
     "type": "git",
     "url": "https://github.com/kolotaev/Axino.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "deepcopy": "^2.0.0"
+  },
   "devDependencies": {
     "chai": "^4.2",
     "docsify-cli": "^4.4",
