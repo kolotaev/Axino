@@ -13,6 +13,7 @@ describe('Event', () => {
     ev.should.have.property('aggregateID').that.equals('ttyy');
     ev.should.have.property('sequenceNumber').that.equals(10000000000000000000000000000000000000);
   });
+
   describe('#payload', () => {
     it('should return original event attributes', () => {
       const ev = new Event({
@@ -27,21 +28,40 @@ describe('Event', () => {
       });
     });
   });
+
   describe('#clone()', () => {
     describe('should return event\'s deep copy', () => {
-      it('when called without props', () => {
-        const ev = new Event({ aggregate_id: 'asdf', sequence_number: 109, foo: [1, 5, { a: 'b' }] });
+      it('when called without overriding props', () => {
+        const ev = new Event({
+          aggregate_id: 'asdf',
+          sequence_number: 109,
+          foo: [1, 5, { a: 'b' }],
+          baz: { z: Buffer.alloc(6) },
+        });
         const ev2 = ev.clone();
         ev2.should.have.own.property('aggregateID').that.equal('asdf');
         ev2.should.have.own.property('sequenceNumber').that.equal(109);
-        ev2.payload.should.eql(0);
-        ev2.aggregateID.should.equal('asdf');
-        ev2.sequenceNumber.should.equal(109);
+        ev2.payload.should.eql({
+          foo: [1, 5, { a: 'b' }],
+          baz: { z: Buffer.alloc(6) },
+        });
       });
-      it('when called without props', () => {
-        // const Clazz = class OrderAggregateRoot extends AggregateRoot {};
-        // const orderAR = new Clazz('asdf');
-        // `${orderAR}`.should.equal('OrderAggregateRoot: asdf');
+
+      it('when called with overriding props', () => {
+        const ev = new Event({
+          aggregate_id: 'asdf',
+          sequence_number: 109,
+          foo: [1, 5, { a: 'b' }],
+          baz: { z: Buffer.alloc(6) },
+        });
+        const ev2 = ev.clone({ foo: 'changed', newProp: { g: 'h' } });
+        ev2.should.have.own.property('aggregateID').that.equal('asdf');
+        ev2.should.have.own.property('sequenceNumber').that.equal(109);
+        ev2.payload.should.eql({
+          foo: 'changed',
+          baz: { z: Buffer.alloc(6) },
+          newProp: { g: 'h' },
+        });
       });
     });
   });
