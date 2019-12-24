@@ -29,7 +29,7 @@ describe('Event', () => {
     ev.bar.should.eql('me');
   });
 
-  describe('#payload', () => {
+  describe('#payload()', () => {
     it('should return original event attributes', () => {
       const ev = new Event({
         aggregate_id: 'zxc',
@@ -40,6 +40,24 @@ describe('Event', () => {
       ev.payload().should.eql({
         foo: [1, 5, { a: 'b' }],
         bar: 'me',
+      });
+    });
+  });
+
+  describe('#meta()', () => {
+    it('should return event\'s metadata', () => {
+      const date = Date.now();
+      const ev = new Event({
+        aggregate_id: 'zxc',
+        sequence_number: 1,
+        foo: [1, 5, { a: 'b' }],
+        bar: 'me',
+        date_created: date,
+      });
+      ev.meta().should.eql({
+        aggregateID: 'zxc',
+        dateCreated: date,
+        sequenceNumber: 1,
       });
     });
   });
