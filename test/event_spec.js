@@ -22,7 +22,7 @@ describe('Event', () => {
         foo: [1, 5, { a: 'b' }],
         bar: 'me',
       });
-      ev.payload.should.eql({
+      ev.payload().should.eql({
         foo: [1, 5, { a: 'b' }],
         bar: 'me',
       });
@@ -41,7 +41,7 @@ describe('Event', () => {
         const ev2 = ev.clone();
         ev2.should.have.own.property('aggregateID').that.equal('asdf');
         ev2.should.have.own.property('sequenceNumber').that.equal(109);
-        ev2.payload.should.eql({
+        ev2.payload().should.eql({
           foo: [1, 5, { a: 'b' }],
           baz: { z: Buffer.alloc(6) },
         });
@@ -57,7 +57,7 @@ describe('Event', () => {
         const ev2 = ev.clone({ foo: 'changed', newProp: { g: 'h' } });
         ev2.should.have.own.property('aggregateID').that.equal('asdf');
         ev2.should.have.own.property('sequenceNumber').that.equal(109);
-        ev2.payload.should.eql({
+        ev2.payload().should.eql({
           foo: 'changed',
           baz: { z: Buffer.alloc(6) },
           newProp: { g: 'h' },
