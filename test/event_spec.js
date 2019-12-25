@@ -73,6 +73,7 @@ describe('Event', () => {
           baz: { z: Buffer.alloc(6) },
         });
         const ev2 = ev.clone();
+        ev2.should.be.instanceOf(Event);
         ev2.should.have.own.property('aggregateID').that.equal('asdf');
         ev2.should.have.own.property('sequenceNumber').that.equal(109);
         ev2.payload().should.eql({
@@ -89,6 +90,7 @@ describe('Event', () => {
           baz: { z: Buffer.alloc(6) },
         });
         const ev2 = ev.clone({ foo: 'changed', newProp: { g: 'h' } });
+        ev2.should.be.instanceOf(Event);
         ev2.should.have.own.property('aggregateID').that.equal('asdf');
         ev2.should.have.own.property('sequenceNumber').that.equal(109);
         ev2.payload().should.eql({
@@ -105,6 +107,7 @@ describe('Event', () => {
           baz: 'me',
         });
         const ev2 = ev.clone();
+        ev2.should.be.instanceOf(Event);
         ev2.aggregateID = 'xyz';
         ev2.sequenceNumber = 123;
         ev2.baz = [89, 66];
