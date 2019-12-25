@@ -46,7 +46,7 @@ describe('Event', () => {
   });
 
   describe('#meta()', () => {
-    it.only('should return event\'s metadata', () => {
+    it('should return event\'s metadata', () => {
       const date = Date.now();
       const ev = new Event({
         aggregate_id: 'zxc',
