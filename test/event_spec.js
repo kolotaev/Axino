@@ -4,7 +4,7 @@ const { Event } = require('../lib/event');
 
 
 describe('Event', () => {
-  it('should have aggregateID and sequenceNumber', () => {
+  it('should have aggregateID, sequenceNumber and dateCreated', () => {
     const ev = new Event({
       aggregate_id: 'ttyy',
       sequence_number: 10000000000000000000000000000000000000,
@@ -12,6 +12,7 @@ describe('Event', () => {
     });
     ev.should.have.property('aggregateID').that.equals('ttyy');
     ev.should.have.property('sequenceNumber').that.equals(10000000000000000000000000000000000000);
+    ev.should.have.property('dateCreated').that.gt(0);
   });
 
   it('should be immutable', function test() {
@@ -95,6 +96,20 @@ describe('Event', () => {
           baz: { z: Buffer.alloc(6) },
           newProp: { g: 'h' },
         });
+      });
+
+      it('returns copy that is also immutable', () => {
+        const ev = new Event({
+          aggregate_id: 'asdf',
+          sequence_number: 109,
+          baz: 'me',
+        });
+        const ev2 = ev.clone();
+        ev2.aggregateID = 'xyz';
+        ev2.sequenceNumber = 123;
+        ev2.baz = [89, 66];
+        ev2.aggregateID.should.eql('asdf');
+        ev2.sequenceNumber.should.eql(109);
       });
     });
   });
