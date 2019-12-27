@@ -1,9 +1,41 @@
 require('chai').should();
 
-const { Event } = require('../lib/event');
+const { Event, SnapshotEvent } = require('../lib/event');
 
 
 describe('Event', () => {
+  describe('.fullSchema()', () => {
+    it('should return full inherited event schema', () => {
+      class My extends SnapshotEvent {
+        static schema() {
+          return {
+            foo: { type: 'String' },
+          };
+        }
+      }
+      My.fullSchema().should.eql({
+        aggregateID: {
+          present: true,
+          type: 'String',
+        },
+        data: {
+          type: 'String',
+        },
+        dateCreated: {
+          present: true,
+          type: 'Date',
+        },
+        foo: {
+          type: 'String',
+        },
+        sequenceNumber: {
+          present: true,
+          type: 'Integer',
+        },
+      });
+    });
+  });
+
   it('should have aggregateID, sequenceNumber and dateCreated', () => {
     const ev = new Event({
       aggregate_id: 'ttyy',
