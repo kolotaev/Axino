@@ -6,14 +6,14 @@ const { Event, SnapshotEvent } = require('../lib/event');
 describe('Event', () => {
   describe('.fullSchema()', () => {
     it('should return full inherited event schema', () => {
-      class My extends SnapshotEvent {
+      class MyEvent extends SnapshotEvent {
         static schema() {
           return {
             foo: { type: 'String' },
           };
         }
       }
-      My.fullSchema().should.eql({
+      MyEvent.fullSchema().should.eql({
         aggregateID: {
           present: true,
           type: 'String',
@@ -38,29 +38,29 @@ describe('Event', () => {
 
   describe('.schema()', () => {
     it('should return own event schema', () => {
-      class My extends SnapshotEvent {
+      class MyEvent extends SnapshotEvent {
         static schema() {
           return {
             foo: { type: 'String' },
           };
         }
       }
-      My.schema().should.eql({
+      MyEvent.schema().should.eql({
         foo: {
           type: 'String',
         },
       });
     });
 
-    it('should override any parent\'s fields in case ov overlapping fields', () => {
-      class My extends Event {
+    it('should override any parent\'s fields in case of overlapping fields', () => {
+      class MyEvent extends Event {
         static schema() {
           return {
             aggregateID: { type: 'Integer' },
           };
         }
       }
-      My.fullSchema().should.eql({
+      MyEvent.fullSchema().should.eql({
         aggregateID: {
           type: 'Integer',
         },
