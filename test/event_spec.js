@@ -36,6 +36,46 @@ describe('Event', () => {
     });
   });
 
+  describe('.schema()', () => {
+    it('should return own event schema', () => {
+      class My extends SnapshotEvent {
+        static schema() {
+          return {
+            foo: { type: 'String' },
+          };
+        }
+      }
+      My.schema().should.eql({
+        foo: {
+          type: 'String',
+        },
+      });
+    });
+
+    it('should override any parent\'s fields in case ov overlapping fields', () => {
+      class My extends Event {
+        static schema() {
+          return {
+            aggregateID: { type: 'Integer' },
+          };
+        }
+      }
+      My.fullSchema().should.eql({
+        aggregateID: {
+          type: 'Integer',
+        },
+        dateCreated: {
+          present: true,
+          type: 'Date',
+        },
+        sequenceNumber: {
+          present: true,
+          type: 'Integer',
+        },
+      });
+    });
+  });
+
   it('should have aggregateID, sequenceNumber and dateCreated', () => {
     const ev = new Event({
       aggregate_id: 'ttyy',
