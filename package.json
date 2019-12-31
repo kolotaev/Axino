@@ -24,7 +24,8 @@
     "url": "https://github.com/kolotaev/Axino.git"
   },
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "@hapi/joi": "^17.0.2"
   },
   "devDependencies": {
     "chai": "^4.2",
