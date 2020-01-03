@@ -1,14 +1,14 @@
 require('chai').should();
 
 const { Event, SnapshotEvent } = require('../lib/event');
-const { schema } = require('../lib/validation');
+const { Schema } = require('../lib/validation');
 
 class MyEvent extends Event {
   static schema() {
     return {
-      foo: schema.any(),
-      bar: schema.any(),
-      baz: schema.any(),
+      foo: Schema.any(),
+      bar: Schema.any(),
+      baz: Schema.any(),
     };
   }
 }
