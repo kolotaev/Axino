@@ -130,7 +130,7 @@ describe('Event', () => {
 
   describe('#meta()', () => {
     it('should return event\'s metadata', () => {
-      const date = Date.now();
+      const date = new Date('2018-01-24T12:38:29.069Z');
       const ev = new MyEvent({
         aggregateID: 'zxc',
         sequenceNumber: 1,
