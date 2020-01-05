@@ -197,6 +197,22 @@ describe('Event', () => {
         ev2.aggregateID.should.eql('asdf');
         ev2.sequenceNumber.should.eql(109);
       });
+
+      it('returns copy that is also mutable if original event was mutable', () => {
+        const ev = new MyEvent({
+          aggregateID: 'asdf',
+          sequenceNumber: 109,
+          baz: 'me',
+        }, { mutable: true });
+        const ev2 = ev.clone();
+        ev2.should.be.instanceOf(Event);
+        ev2.aggregateID = 'xyz';
+        ev2.sequenceNumber = 123;
+        ev2.baz = [89, 66];
+        ev2.aggregateID.should.eql('xyz');
+        ev2.sequenceNumber.should.eql(123);
+        ev2.baz.should.eql([89, 66]);
+      });
     });
   });
 });
