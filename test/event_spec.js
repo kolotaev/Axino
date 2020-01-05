@@ -165,24 +165,6 @@ describe('Event', () => {
         });
       });
 
-      xit('when called with overriding props', () => {
-        const ev = new MyEvent({
-          aggregateID: 'asdf',
-          sequenceNumber: 109,
-          foo: [1, 5, { a: 'b' }],
-          baz: { z: Buffer.alloc(6) },
-        });
-        const ev2 = ev.clone({ foo: 'changed', newProp: { g: 'h' } });
-        ev2.should.be.instanceOf(Event);
-        ev2.should.have.own.property('aggregateID').that.equal('asdf');
-        ev2.should.have.own.property('sequenceNumber').that.equal(109);
-        ev2.payload().should.eql({
-          foo: 'changed',
-          baz: { z: Buffer.alloc(6) },
-          newProp: { g: 'h' },
-        });
-      });
-
       it('returns copy that is also immutable', () => {
         const ev = new MyEvent({
           aggregateID: 'asdf',
