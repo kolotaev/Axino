@@ -148,7 +148,7 @@ describe('Event', () => {
 
   describe('#clone()', () => {
     describe('should return event\'s deep copy', () => {
-      it('when called without overriding props', () => {
+      it('that has the same fields', () => {
         const ev = new MyEvent({
           aggregateID: 'asdf',
           sequenceNumber: 109,
@@ -165,7 +165,7 @@ describe('Event', () => {
         });
       });
 
-      it('returns copy that is also immutable', () => {
+      it('that is also immutable', () => {
         const ev = new MyEvent({
           aggregateID: 'asdf',
           sequenceNumber: 109,
@@ -180,7 +180,7 @@ describe('Event', () => {
         ev2.sequenceNumber.should.eql(109);
       });
 
-      it('returns copy that is also mutable if original event was mutable', () => {
+      it('that is mutable if original event was mutable', () => {
         const ev = new MyEvent({
           aggregateID: 'asdf',
           sequenceNumber: 109,
