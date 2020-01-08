@@ -31,7 +31,7 @@ describe('Event', () => {
         data: {
           type: 'String',
         },
-        dateCreated: {
+        createdAt: {
           present: true,
           type: 'Date',
         },
@@ -74,7 +74,7 @@ describe('Event', () => {
         aggregateID: {
           type: 'Integer',
         },
-        dateCreated: {
+        createdAt: {
           present: true,
           type: 'Date',
         },
@@ -86,7 +86,7 @@ describe('Event', () => {
     });
   });
 
-  it('should have aggregateID, sequenceNumber, dateCreated and bar fields', () => {
+  it('should have aggregateID, sequenceNumber, createdAt and bar fields', () => {
     const ev = new MyEvent({
       aggregateID: 'ttyy',
       sequenceNumber: 100000000000000,
@@ -94,11 +94,11 @@ describe('Event', () => {
     });
     ev.should.have.property('aggregateID').that.equals('ttyy');
     ev.should.have.property('sequenceNumber').that.equals(100000000000000);
-    ev.should.have.property('dateCreated').that.gt(0);
+    ev.should.have.property('createdAt').that.instanceOf(Date);
     ev.should.have.property('bar').that.equals('me');
   });
 
-  it('should be immutable', function test() {
+  it('should be immutable by default', () => {
     const ev = new MyEvent({
       aggregateID: 'abc',
       sequenceNumber: 1,
@@ -109,8 +109,21 @@ describe('Event', () => {
     ev.bar = [89, 66];
     ev.aggregateID.should.eq('abc');
     ev.sequenceNumber.should.eq(1);
-    this.skip();
     ev.bar.should.eql('me');
+  });
+
+  it('should be mutable if explicitly set so', () => {
+    const ev = new MyEvent({
+      aggregateID: 'abc',
+      sequenceNumber: 1,
+      bar: 'me',
+    }, { mutable: true });
+    ev.aggregateID = 'xyz';
+    ev.sequenceNumber = 123;
+    ev.bar = [89, 66];
+    ev.aggregateID.should.eq('xyz');
+    ev.sequenceNumber.should.eq(123);
+    ev.bar.should.eql([89, 66]);
   });
 
   describe('#payload()', () => {
@@ -136,11 +149,11 @@ describe('Event', () => {
         sequenceNumber: 1,
         foo: [1, 5, { a: 'b' }],
         bar: 'me',
-        dateCreated: date,
+        createdAt: date,
       });
       ev.meta().should.eql({
         aggregateID: 'zxc',
-        dateCreated: date,
+        createdAt: date,
         sequenceNumber: 1,
       });
     });
