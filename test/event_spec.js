@@ -47,28 +47,20 @@ describe('Event', () => {
       s.should.not.have.keys(['aggregateID', 'data', 'createdAt', 'foo', 'sequenceNumber']);
     });
 
-    xit('should override any parent\'s fields in case of overlapping fields', () => {
+    it('should override any parent\'s fields in case of overlapping fields', () => {
       class MyLocalEvent extends Event {
         static schema() {
           return {
-            aggregateID: { type: 'Integer' },
+            aggregateID: Schema.number().integer(),
+            createdAt: Schema.string(),
           };
         }
       }
       const s = MyLocalEvent.fullSchema();
-      s.should.eql({
-        aggregateID: {
-          type: 'Integer',
-        },
-        createdAt: {
-          present: true,
-          type: 'Date',
-        },
-        sequenceNumber: {
-          present: true,
-          type: 'Integer',
-        },
-      });
+      // const aggregateID = ;
+      s.aggregateID.should.have.property('schemaType').that.is.eq('number');
+      s.createdAt.should.have.property('schemaType').that.is.eq('string');
+      s.sequenceNumber.should.have.property('schemaType').that.is.eq('number');
     });
   });
 
