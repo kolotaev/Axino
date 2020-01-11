@@ -3,6 +3,7 @@ require('chai').should();
 const { Event, SnapshotEvent } = require('../lib/event');
 const { Schema } = require('../lib/validation');
 
+
 class MyEvent extends Event {
   static schema() {
     return {
@@ -57,7 +58,6 @@ describe('Event', () => {
         }
       }
       const s = MyLocalEvent.fullSchema();
-      // const aggregateID = ;
       s.aggregateID.should.have.property('schemaType').that.is.eq('number');
       s.createdAt.should.have.property('schemaType').that.is.eq('string');
       s.sequenceNumber.should.have.property('schemaType').that.is.eq('number');
@@ -186,6 +186,64 @@ describe('Event', () => {
         ev2.sequenceNumber.should.eql(123);
         ev2.baz.should.eql([89, 66]);
       });
+    });
+  });
+
+  describe('#equals()', () => {
+    it('should return true if two objects have the same properties that are equal', () => {
+      const ev1 = new MyEvent({
+        aggregateID: 'zxc',
+        sequenceNumber: 1,
+        foo: [1, 5, { a: 'b' }],
+        bar: 'me',
+      });
+      const ev2 = new MyEvent({
+        aggregateID: 'zxc',
+        sequenceNumber: 1,
+        foo: [1, 5, { a: 'b' }],
+        bar: 'me',
+      });
+      let result = ev1.equals(ev2);
+      result.should.eq(true);
+      result = ev2.equals(ev1);
+      result.should.eq(true);
+    });
+
+    it('should return false if two objects have the same properties that are not equal', () => {
+      const ev1 = new MyEvent({
+        aggregateID: 'zxc',
+        sequenceNumber: 1,
+        foo: [1, 5, { a: 'b' }],
+        bar: '100',
+      });
+      const ev2 = new MyEvent({
+        aggregateID: 'zxc',
+        sequenceNumber: 1,
+        foo: [1, 5, { a: 'b' }],
+        bar: 100,
+      });
+      let result = ev1.equals(ev2);
+      result.should.eq(false);
+      result = ev2.equals(ev1);
+      result.should.eq(false);
+    });
+
+    it('should return false if two objects have different properties', () => {
+      const ev1 = new MyEvent({
+        aggregateID: 'zxc',
+        sequenceNumber: 1,
+        foo: [1, 5, { a: 'b' }],
+      });
+      const ev2 = new MyEvent({
+        aggregateID: 'zxc',
+        sequenceNumber: 1,
+        foo: [1, 5, { a: 'b' }],
+        bar: 100,
+      });
+      let result = ev1.equals(ev2);
+      result.should.eq(false);
+      result = ev2.equals(ev1);
+      result.should.eq(false);
     });
   });
 });
