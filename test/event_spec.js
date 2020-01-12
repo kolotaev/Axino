@@ -137,6 +137,19 @@ describe('Event', () => {
     });
   });
 
+  describe('#toString()', () => {
+    it('should event representation with all fields pairs exposed', () => {
+      const ev = new MyEvent({
+        aggregateID: 'zxc',
+        sequenceNumber: 1,
+        foo: [1, 5],
+        bar: 'me',
+        createdAt: new Date('2018-01-24T12:38:29.069Z'),
+      });
+      `${ev}`.should.contain('"MyEvent" => aggregateID: zxc; sequenceNumber: 1; foo: 1,5; bar: me; createdAt: Wed Jan 24 2018');
+    });
+  });
+
   describe('#clone()', () => {
     describe('should return event\'s deep copy', () => {
       it('that has the same fields', () => {
@@ -196,12 +209,14 @@ describe('Event', () => {
         sequenceNumber: 1,
         foo: [1, 5, { a: 'b' }],
         bar: 'me',
+        createdAt: new Date('2018-01-24T12:38:29.069Z'),
       });
       const ev2 = new MyEvent({
         aggregateID: 'zxc',
         sequenceNumber: 1,
         foo: [1, 5, { a: 'b' }],
         bar: 'me',
+        createdAt: new Date('2018-01-24T12:38:29.069Z'),
       });
       let result = ev1.equals(ev2);
       result.should.eq(true);
