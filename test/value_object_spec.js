@@ -46,7 +46,7 @@ describe('ValueObject', () => {
   });
 
   describe('#toString()', () => {
-    it('should event representation with all fields pairs exposed', () => {
+    it('should give object representation with all fields pairs exposed', () => {
       const vo = new MyValueObject({
         foo: [1, 5],
         bar: 'me',
@@ -77,7 +77,7 @@ describe('ValueObject', () => {
         vo2.baz.should.eql({ z: Buffer.alloc(6) });
       });
 
-      it('that is mutable if original event was mutable', () => {
+      it('that is mutable if original object was mutable', () => {
         const vo1 = new MyValueObject({
           foo: [1, 5, { a: 'b' }],
           baz: { z: Buffer.alloc(6) },

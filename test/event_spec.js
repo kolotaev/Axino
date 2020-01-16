@@ -138,7 +138,7 @@ describe('Event', () => {
   });
 
   describe('#toString()', () => {
-    it('should event representation with all fields pairs exposed', () => {
+    it('should give event representation with all fields pairs exposed', () => {
       const ev = new MyEvent({
         aggregateID: 'zxc',
         sequenceNumber: 1,
