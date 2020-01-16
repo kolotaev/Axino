@@ -1,6 +1,6 @@
 require('chai').should();
 
-const { ValueObject } = require('../lib/value_object');
+const ValueObject = require('../lib/value_object');
 
 
 class MyValueObject extends ValueObject {}
