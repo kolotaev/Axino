@@ -1,6 +1,6 @@
 require('chai').should();
 
-const { SnapshotCommand, TakeSnapshotCommand } = require('../lib/aggregate.js');
+const { SnapshotCommand, TakeSnapshotCommand } = require('../lib/aggregate');
 
 
 describe('SnapshotCommand', () => {
