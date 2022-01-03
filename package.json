@@ -11,7 +11,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --colors",
     "lint": "eslint .",
     "clean": "rm -rf node_modules package-lock.json yarn.lock",
     "reset": "npm run clean && npm i && npm test"
